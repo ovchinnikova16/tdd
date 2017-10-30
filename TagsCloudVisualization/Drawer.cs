@@ -14,7 +14,7 @@ namespace TagsCloudVisualization
             var bitmap = new Bitmap(size.Width, size.Height);
             var g = Graphics.FromImage(bitmap);
             var pen = new Pen(Color.Blue);
-            g.DrawEllipse(pen, cloudCenter.X, cloudCenter.Y, 2, 2);
+            g.DrawEllipse(pen, cloudCenter.X-1, cloudCenter.Y-1, 2, 2);
             foreach (var rectangle in rectangles)
                 g.DrawRectangle(pen, rectangle);
 

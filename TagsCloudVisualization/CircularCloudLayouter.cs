@@ -88,23 +88,30 @@ namespace TagsCloudVisualization
         {
             var cloud = new CircularCloudLayouter(new Point(10, 10));
 
-            cloud.PutNextRectangle(new Size(size1X, size1Y));
-            var rectangle = cloud.PutNextRectangle(new Size(size2X, size2Y));
+            var firstRectangle = cloud.PutNextRectangle(new Size(size1X, size1Y));
+            var secondRectangle = cloud.PutNextRectangle(new Size(size2X, size2Y));
 
-            rectangle.Size.ShouldBeEquivalentTo(new Size(size2X, size2Y));
+            secondRectangle.Size.ShouldBeEquivalentTo(new Size(size2X, size2Y));
+            firstRectangle.IntersectsWith(secondRectangle).Should().BeFalse();
         }
 
         [Test]
         public void PutNextRectangle_AddSeweralRectangles_InCloud()
         {
-            var cloud = new CircularCloudLayouter(new Point(10, 10));
+            var cloud = new CircularCloudLayouter(new Point(20, 20));
+            var rectangles = new List<Rectangle>();
 
-            cloud.PutNextRectangle(new Size(2, 2));
-            cloud.PutNextRectangle(new Size(3, 3));
+            for (int i = 0; i < 5; i++)
+                rectangles.Add(cloud.PutNextRectangle(new Size(2, 2)));
             var rectangle = cloud.PutNextRectangle(new Size(2, 2));
 
-            rectangle.Size.ShouldBeEquivalentTo(new Size(2, 2));
+            rectangle.X.Should().BeGreaterThan(10);
+            rectangle.Y.Should().BeGreaterThan(10);
+            rectangle.X.Should().BeLessThan(30);
+            rectangle.Y.Should().BeLessThan(30);
         }
+
+
 
     }
 }
