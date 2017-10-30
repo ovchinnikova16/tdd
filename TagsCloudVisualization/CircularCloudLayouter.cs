@@ -103,12 +103,14 @@ namespace TagsCloudVisualization
 
             for (int i = 0; i < 5; i++)
                 rectangles.Add(cloud.PutNextRectangle(new Size(2, 2)));
-            var rectangle = cloud.PutNextRectangle(new Size(2, 2));
 
-            rectangle.X.Should().BeGreaterThan(10);
-            rectangle.Y.Should().BeGreaterThan(10);
-            rectangle.X.Should().BeLessThan(30);
-            rectangle.Y.Should().BeLessThan(30);
+            foreach (var rectangle in rectangles)
+            {
+                rectangle.X.Should().BeGreaterThan(10);
+                rectangle.Y.Should().BeGreaterThan(10);
+                rectangle.X.Should().BeLessThan(30);
+                rectangle.Y.Should().BeLessThan(30);
+            }
         }
 
 
