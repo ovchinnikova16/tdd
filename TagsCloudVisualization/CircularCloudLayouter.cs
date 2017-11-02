@@ -33,12 +33,8 @@ namespace TagsCloudVisualization
         private Rectangle FindLocation(Size rectangleSize)
         {
             if (rectangles.Count == 0)
-            {
-                var shift = new Point(rectangleSize.Width / 2, rectangleSize.Height / 2);
-                var top = new Point(cloudCenter.X - shift.X, cloudCenter.Y - shift.Y);
-                return new Rectangle(top, rectangleSize);
-            }
-
+                return PutFirstRectangle(rectangleSize, cloudCenter);
+            
             var distance = 1;
             var rectangle = new Rectangle(new Point(0, 0), rectangleSize);
 
@@ -54,6 +50,14 @@ namespace TagsCloudVisualization
                 }
                 distance += 1;
             }
+        }
+
+        private Rectangle PutFirstRectangle(Size rectangleSize, Point cloudCenter)
+        {
+            var shiftX = rectangleSize.Width / 2;
+            var shiftY = rectangleSize.Height / 2;
+            var top = new Point(cloudCenter.X - shiftX, cloudCenter.Y - shiftY);
+            return new Rectangle(top, rectangleSize);
         }
     }
 }
